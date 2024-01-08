@@ -5,7 +5,7 @@ import { Auth } from './Pages/Auth/auth'
 function App() {
   return (
     <>
-      {/* <Header/> */}
+      <Header/>
       <Auth/>
     </>
   )

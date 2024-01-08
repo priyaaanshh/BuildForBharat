@@ -1,6 +1,36 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./auth.css";
+import { AuthContext } from "../../Context/authContext";
+import axios from "axios";
+import { Transition } from "@headlessui/react";
+import { Toaster, ToastIcon, toast, resolveValue } from "react-hot-toast";
+
+
+const TailwindToaster = () => {
+  return (
+    <Toaster position="top-right">
+      {(t) => (
+        <Transition
+          appear
+          show={t.visible}
+          className="transform p-4 flex bg-white rounded shadow-lg"
+          enter="transition-all duration-150"
+          enterFrom="opacity-0 scale-50"
+          enterTo="opacity-100 scale-100"
+          leave="transition-all duration-150"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-75"
+        >
+          <ToastIcon toast={t} />
+          <p className="px-2">{resolveValue(t.message)}</p>
+        </Transition>
+      )}
+    </Toaster>
+  );
+};
+
 export const Auth = () => {
+  const {error, dispatch } = useContext(AuthContext);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [isLogin, setIsLogin] = useState(true);
   const [loginCredentials, setLoginCredentials] = useState({
@@ -12,6 +42,11 @@ export const Auth = () => {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    error ? toast.error(error.message) : {}
+  }, [error]);
+  
 
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
@@ -29,22 +64,55 @@ export const Auth = () => {
     }));
   };
 
-  const handleLogin = () => {
-    console.log("Login with", loginCredentials);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/api/v1/auth/login`,
+        loginCredentials
+      );
+      if (res.data.success) {
+        console.log(res.data);
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.token });
+        localStorage.setItem("token", res.data.token);
+      } 
+    } catch (error) {
+      // console.log(error);
+      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+    }
   };
 
-  const handleSignUp = () => {
-    console.log("Login with", loginCredentials);
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/api/v1/auth/register`,
+        registerCredentials
+      );
+      if (res.data.success) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.token });
+        localStorage.setItem("token", res.data.token);
+      }
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+      // console.log(error);
+    }
   };
 
   return (
-    <div className="AuthContainer">
+    <form className="AuthContainer">
       <div className="Auth">
         <input
           type="text"
           name="username"
           placeholder="Enter Username"
-          value={loginCredentials.username}
+          value={
+            isLogin ? loginCredentials.username : registerCredentials.username
+          }
           onChange={isLogin ? handleLoginChange : handleSignUpChange}
         />
         {!isLogin ? (
@@ -52,6 +120,7 @@ export const Auth = () => {
             type="email"
             name="email"
             placeholder="Enter Email"
+            autoComplete="username"
             value={registerCredentials.email}
             onChange={handleSignUpChange}
           />
@@ -62,7 +131,10 @@ export const Auth = () => {
           type={isPasswordHidden ? "password" : "text"}
           name="password"
           placeholder="Enter Password"
-          value={loginCredentials.password}
+          autoComplete="current-password"
+          value={
+            isLogin ? loginCredentials.password : registerCredentials.password
+          }
           onChange={isLogin ? handleLoginChange : handleSignUpChange}
         />
         <div className="showPassword">
@@ -77,10 +149,11 @@ export const Auth = () => {
           Show Password
         </div>
         {isLogin ? (
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={(e) => handleLogin(e)}>Login</button>
         ) : (
-          <button onClick={handleSignUp}>SignUp</button>
+          <button onClick={(e) => handleSignUp(e)}>SignUp</button>
         )}
+        <TailwindToaster />
         {isLogin ? (
           <div
             className="createAccountText"
@@ -97,6 +170,6 @@ export const Auth = () => {
           </div>
         )}
       </div>
-    </div>
+    </form>
   );
 };
