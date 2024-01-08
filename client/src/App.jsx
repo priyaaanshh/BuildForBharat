@@ -1,14 +1,12 @@
-import { useState } from 'react'
 import './App.css'
 import Header from './Container/Header'
+import { Auth } from './Pages/Auth/auth'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <Header/>
-     
+      {/* <Header/> */}
+      <Auth/>
     </>
   )
 }
