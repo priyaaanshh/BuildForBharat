@@ -21,6 +21,7 @@ app.use(Express.json());
 app.use('/api/v1/auth', authRoutes);
 
 app.use(errorHandler);
+
 app.listen(process.env.PORT, () => {
     console.log('Connected to Backend')
 })
