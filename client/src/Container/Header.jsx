@@ -12,8 +12,9 @@ function Header() {
   return (
     <header className="bg-gray-800 p-4 md:flex md:justify-evenly justify-between md:items-center font-serif">
       <div className="flex items-center  mb-4 justify-between md:mb-0">
-        <div className="logo">
+        <div className="logo flex items-center text-white">
           <img className="h-8 rounded-lg" src={logo} alt="Logo" />
+          <h1>ShopTalk</h1>
         </div>
 
         <div className="md:hidden">

@@ -1,12 +1,11 @@
 import './App.css'
 import Header from './Container/Header'
-import { Auth } from './Pages/Auth/auth'
-
+import Footer from './Container/Footer'
 function App() {
   return (
     <>
       <Header/>
-      <Auth/>
+      <Footer/>
     </>
   )
 }
