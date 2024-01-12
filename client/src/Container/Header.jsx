@@ -1,6 +1,9 @@
-import { FaShoppingCart, FaUser, FaSearch } from "react-icons/fa";
-import logo from "../assets/shoptalk.png";
-import { useState } from "react";
+// Header.js
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaShoppingCart, FaUser, FaSearch } from 'react-icons/fa';
+import logo from '../assets/shoptalk.png';
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -11,7 +14,7 @@ function Header() {
 
   return (
     <header className="bg-gray-800 p-4 md:flex md:justify-evenly justify-between md:items-center font-serif">
-      <div className="flex items-center  mb-4 justify-between md:mb-0">
+      <div className="flex items-center mb-4 justify-between md:mb-0">
         <div className="logo flex items-center text-white">
           <img className="h-8 rounded-lg" src={logo} alt="Logo" />
           <h1>ShopTalk</h1>
@@ -43,42 +46,44 @@ function Header() {
       {/* Responsive navigation */}
       <nav
         className={`${
-          isNavOpen ? "block" : "hidden"
+          isNavOpen ? 'block' : 'hidden'
         } md:block md:flex md:items-center md:w-auto`}
       >
         <ul className="flex flex-col md:flex-row md:space-x-4">
+          {/* Home Link */}
           <li>
-            <a href="#" className="text-white">
+            <Link to="/" className="text-white">
               Home
-            </a>
+            </Link>
           </li>
+
+          {/* Shop Link */}
           <li>
-            <a href="#" className="text-white">
+            <Link to="/shop" className="text-white">
               Shop
-            </a>
+            </Link>
           </li>
+
+          {/* About Us Link */}
           <li>
-            <a href="#" className="text-white">
+            <Link to="/about" className="text-white">
               About Us
-            </a>
+            </Link>
           </li>
+
+          {/* Contact Link */}
           <li>
-            <a href="#" className="text-white">
+            <Link to="/contact" className="text-white">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 
         {/* Search bar */}
         <div className="hidden md:flex items-center px-5">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-gray-700 text-white px-3 py-1 rounded-2xl "
-          />
-          <button type="button" className="text-white ml-2">
+          <Link to="/search" className="text-white ml-2">
             <FaSearch />
-          </button>
+          </Link>
         </div>
 
         <div className="md:flex md:items-center">
