@@ -1,20 +1,23 @@
 /* eslint-disable react/prop-types */
 import "./Carousel.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 const Carousel = ({ images }) => {
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+  const nextImage = () => {
+    setIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
-    return () => clearInterval(interval);
-  }, [images]);
+  const prevImage = () => {
+    setIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
 
   return (
     <div className="carousel">
+      <button className="carouselButton" onClick={prevImage}>
+        &lt;
+      </button>
       {images.map((img, i) => (
         <img
           key={i}
@@ -23,6 +26,9 @@ const Carousel = ({ images }) => {
           className={i === index ? "active" : ""}
         />
       ))}
+      <button className="carouselButton" onClick={nextImage}>
+        &gt;
+      </button>
     </div>
   );
 };
