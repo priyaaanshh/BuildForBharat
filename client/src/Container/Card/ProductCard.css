@@ -3,8 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto;
-    width: 245px;
+    height: max-content;
+    width: 100%;
+    max-width: 300px;
     overflow: hidden;
     margin: 5px;
     gap:8px;
@@ -20,7 +21,10 @@
 }
 
 .carouselWrapper {
-    margin-bottom: 8px;
+    width: 100%;
+    height: max-content;
+    /* margin-bottom: 8px; */
+    overflow: hidden;
 }
 
 .product-details {
@@ -30,6 +34,7 @@
     justify-content: center;
     width: 100%;
     padding: 8px;
+    padding-top: 0;
 }
 
 .cardRow {
@@ -37,7 +42,6 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 4px;
 }
 
 .cardName {
@@ -60,5 +64,3 @@
     color: #333;
     width: 100%;
 }
-
-/* Add any additional styles as needed */

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./ProductCard.css";
 import Carousel from "./Carousel";
-
+import { Link } from 'react-router-dom';
 const ProductCard = ({ product }) => {
   const { name, price, description, images } = product;
 
@@ -10,13 +10,13 @@ const ProductCard = ({ product }) => {
       <div className="carouselWrapper">
         <Carousel images={images} />
       </div>
-      <div className="product-details">
+      <Link to='/product' className="product-details">
         <div className="cardRow">
           <h2 className="cardName">{name}</h2>
           <div className="cardPrice">Price: ${price}</div>
         </div>
         <div className="cardDescription">{description.slice(0, 100)}</div>
-      </div>
+      </Link>
     </div>
   );
 };

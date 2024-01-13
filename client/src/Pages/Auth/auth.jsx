@@ -4,7 +4,7 @@ import { AuthContext } from "../../Context/authContext";
 import axios from "axios";
 import { Transition } from "@headlessui/react";
 import { Toaster, ToastIcon, toast, resolveValue } from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 
 const TailwindToaster = () => {
   return (
@@ -30,7 +30,9 @@ const TailwindToaster = () => {
 };
 
 export const Auth = () => {
-  const {error, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { error, loading, dispatch } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(loading);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [isLogin, setIsLogin] = useState(true);
   const [loginCredentials, setLoginCredentials] = useState({
@@ -44,9 +46,12 @@ export const Auth = () => {
   });
 
   useEffect(() => {
-    error ? toast.error(error.message) : {}
+    error ? toast.error(error.message) : {};
   }, [error]);
-  
+
+  // useEffect(() => {
+  //   setIsLoading(loading);
+  // }, [loading]);
 
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
@@ -66,22 +71,21 @@ export const Auth = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+
     dispatch({ type: "LOGIN_START" });
-    try {
-      const res = await axios.post(
-        `http://localhost:8080/api/v1/auth/login`,
-        loginCredentials
-      );
-      if (res.data.success) {
-        console.log(res.data);
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.token });
-        localStorage.setItem("token", res.data.token);
-      } 
-    } catch (error) {
-      // console.log(error);
-      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
-    }
+      try {
+        const res = await axios.post(
+          `http://localhost:8080/api/v1/auth/login`,
+          loginCredentials
+        );
+        if (res.data.success) {
+          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.token });
+          navigate("/");
+        }
+      } catch (error) {
+        // console.log(error);
+        dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+      }
   };
 
   const handleSignUp = async (e) => {
@@ -95,7 +99,7 @@ export const Auth = () => {
       );
       if (res.data.success) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.token });
-        localStorage.setItem("token", res.data.token);
+        navigate("/");
       }
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
@@ -140,18 +144,27 @@ export const Auth = () => {
         <div className="showPassword">
           <input
             className="showPasswordInput"
+            id="showPasswordCheckbox"
             type="checkbox"
             value={isPasswordHidden}
             onClick={() => {
               setIsPasswordHidden(!isPasswordHidden);
             }}
           />
-          Show Password
+          <label
+            htmlFor="showPasswordCheckbox"
+          >
+            Show Password
+          </label>
         </div>
         {isLogin ? (
-          <button onClick={(e) => handleLogin(e)}>Login</button>
+          <button onClick={(e) => handleLogin(e)}>
+            {loading ? "Loging In..." : "Login"}
+          </button>
         ) : (
-          <button onClick={(e) => handleSignUp(e)}>SignUp</button>
+          <button onClick={(e) => handleSignUp(e)}>
+            {loading ? "Creating..." : "Create new account"}
+          </button>
         )}
         <TailwindToaster />
         {isLogin ? (

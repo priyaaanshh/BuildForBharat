@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./Carousel.css";
-import { useState} from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Carousel = ({ images }) => {
   const [index, setIndex] = useState(0);
@@ -15,20 +16,22 @@ const Carousel = ({ images }) => {
 
   return (
     <div className="carousel">
-      <button className="carouselButton" onClick={prevImage}>
+      <div className="carouselButton" onClick={prevImage}>
         &lt;
-      </button>
-      {images.map((img, i) => (
-        <img
-          key={i}
-          src={img}
-          alt={`carousel-img-${i}`}
-          className={i === index ? "active" : ""}
-        />
-      ))}
-      <button className="carouselButton" onClick={nextImage}>
+      </div>
+      <Link to="/product">
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt={`carousel-img-${i}`}
+            className={i === index ? "active" : ""}
+          />
+        ))}
+      </Link>
+      <div className="carouselButton" onClick={nextImage}>
         &gt;
-      </button>
+      </div>
     </div>
   );
 };

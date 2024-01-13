@@ -1,0 +1,37 @@
+.Product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    border: 1px solid black;
+    /* margin: 5px; */
+    padding: 8px 25px;
+    margin-top: 0;
+}
+
+.nameRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.productName {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.productPrice {
+    font-size: 24px;
+    font-weight: 400;
+    color: #333;
+}
+
+.productDescription {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+}
