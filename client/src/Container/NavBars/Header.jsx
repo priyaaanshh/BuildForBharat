@@ -20,7 +20,7 @@ const Navbar = () => {
     <div className="navbar">
       <Link to="/" id="nav-logo-wrapper">
         <img src={logo} alt="Logo" id="nav-logo" />
-        <div id="logo-text">ShopTalk</div>
+        <div id="logo-text">ShopTalk 2</div>
       </Link>
       <div className="search-bar">
         <AutoComplete />
