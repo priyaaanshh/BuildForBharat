@@ -57,6 +57,17 @@ const invoices = [
 ];
 
 const ProductPageDescription = () => {
+  const description = `
+  Experience the iPhone 15 – your dynamic companion. Dynamic Island
+  ensures you stay connected, bubbling up alerts seamlessly while you're
+  busy. Its durable design features infused glass and aerospace-grade
+  aluminum, making it dependable and resistant to water and dust.
+  Capture life with precision using the 48 MP Main Camera, perfect for
+  any shot. Powered by the A16 Bionic Processor, it excels in
+  computational photography and more, all while conserving battery life.
+  Plus, it's USB-C compatible, simplifying your charging needs. Elevate
+  your tech game with the iPhone 15 – innovation at your fingertips.
+  Goodbye cable clutter, hello convenience.`;
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row justify-between items-start w-full">
@@ -74,18 +85,7 @@ const ProductPageDescription = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="whitespace-pre-line">
-          Experience the iPhone 15 – your dynamic companion. Dynamic Island
-          ensures you stay connected, bubbling up alerts seamlessly while you're
-          busy. Its durable design features infused glass and aerospace-grade
-          aluminum, making it dependable and resistant to water and dust.
-          Capture life with precision using the 48 MP Main Camera, perfect for
-          any shot. Powered by the A16 Bionic Processor, it excels in
-          computational photography and more, all while conserving battery life.
-          Plus, it's USB-C compatible, simplifying your charging needs. Elevate
-          your tech game with the iPhone 15 – innovation at your fingertips.
-          Goodbye cable clutter, hello convenience.
-        </div>
+        <div className="whitespace-pre-line">{description}</div>
       </CardContent>
       <CardFooter className="flex flex-col items-start justify-between">
         <div className="font-semibold text-lg my-3">Specifications</div>

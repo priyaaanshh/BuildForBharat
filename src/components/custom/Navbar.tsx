@@ -25,14 +25,6 @@ const Navbar = () => {
             <Image src={Logo} alt="" className="size-16" priority />
             <span className="hidden font-bold sm:inline-block ">ShopTalk</span>
           </Link>
-          <nav className="flex items-center gap-4 text-sm lg:gap-6">
-            <Link
-              href="/"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Link
-            </Link>
-          </nav>
           <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
             <SearchBar />
             <ThemeToggle />

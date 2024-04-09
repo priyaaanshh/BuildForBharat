@@ -47,7 +47,10 @@ const Chat = () => {
           <Separator className="my-1" />
           <div className="space-y-2 h-full">
             {messages.map((msg, key) => (
-              <div className="px-4 py-2 rounded-lg bg-secondary w-max">
+              <div
+                className="px-4 py-2 rounded-lg bg-secondary w-max"
+                key={key}
+              >
                 {msg.message}
               </div>
             ))}
