@@ -17,6 +17,8 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import Logo from "@/assets/images/shoptalk.png";
 import Image from "next/image";
+import GithubSignUp from "../signup/github-signup";
+import GoogleSignUp from "../signup/google-signup";
 
 const Page = () => {
   return (
@@ -29,14 +31,8 @@ const Page = () => {
             Enter your username & password to login your account
           </CardDescription>
           <div className="w-full flex justify-center items-center gap-2 pt-2">
-            <Button variant="outline" className="w-full space-x-2 text-lg">
-              <FaGithub />
-              <span>Github</span>
-            </Button>
-            <Button variant="outline" className="w-full space-x-2 text-lg">
-              <FcGoogle />
-              <span>Google</span>
-            </Button>
+            <GithubSignUp />
+            <GoogleSignUp />
           </div>
         </CardHeader>
         <CardContent>
