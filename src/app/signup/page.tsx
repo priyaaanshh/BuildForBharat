@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,32 +10,26 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/images/shoptalk.png";
+import GithubSignUp from "./github-signup";
+import GoogleSignUp from "./google-signup";
 
 const Page = () => {
   return (
     <div className="grid place-items-center h-full">
       <Card className="w-full max-w-[450px]">
         <CardHeader className="flex flex-col items-center justify-center">
-          <Image src={Logo} alt="" priority className="size-24"/>
+          <Image src={Logo} alt="" priority className="size-24" />
           <CardTitle>Create an account</CardTitle>
           <CardDescription>
             Enter your email below to create your account
           </CardDescription>
           <div className="w-full flex justify-center items-center gap-2 pt-2">
-            <Button variant="outline" className="w-full space-x-2 text-lg">
-              <FaGithub />
-              <span>Github</span>
-            </Button>
-            <Button variant="outline" className="w-full space-x-2 text-lg">
-              <FcGoogle />
-              <span>Google</span>
-            </Button>
+            <GithubSignUp />
+            <GoogleSignUp />
           </div>
         </CardHeader>
         <CardContent>
