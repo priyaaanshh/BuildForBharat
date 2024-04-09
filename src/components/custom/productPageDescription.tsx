@@ -59,7 +59,7 @@ const invoices = [
 const ProductPageDescription = () => {
   return (
     <Card className="w-full">
-      <CardHeader className="flex flex-row justify-between items-center w-full">
+      <CardHeader className="flex flex-row justify-between items-start w-full">
         <div className="flex flex-col justify-between items-start space-y-2">
           <CardTitle>Apple iPhone 15 (Black, 128 GB)</CardTitle>
           <CardDescription className="text-primary font-semibold italic">

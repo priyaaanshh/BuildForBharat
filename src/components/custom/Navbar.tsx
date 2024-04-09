@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ThemeToggle } from "./theme-button";
 import { LogOut } from "lucide-react";
 import { Button } from "../ui/button";
+import { SearchBar } from "./searchBar";
 
 const Navbar = () => {
   const Logout = () => {
@@ -33,6 +34,7 @@ const Navbar = () => {
             </Link>
           </nav>
           <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+            <SearchBar />
             <ThemeToggle />
             <Logout />
           </div>
